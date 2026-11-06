@@ -31,6 +31,7 @@ const TEXT = {
     'dl.versions': 'Guarda tutte le versioni dello sviluppo →',
     'don.title': 'Sostieni lo sviluppo', 'don.p1': 'Supplyville lo sto creando da solo, nel tempo libero. Se il progetto ti piace e vuoi vederlo crescere più in fretta, una piccola donazione mi aiuta tantissimo a dedicarci più ore e ad aggiungere nuove funzioni.',
     'don.p2': 'È del tutto volontario: il gioco andrà avanti comunque. Grazie di essere qui!', 'don.btn': '☕ Sostienimi su Ko-fi',
+    'cat.title': 'Tutto quello che c\'è in Supplyville', 'cat.sub': 'Veicoli, strade, colture, negozi, acqua, energia... e più di 50 prodotti che viaggiano per la tua città.', 'cat.prod': 'Prodotti',
     'foot.rights': 'Tutti i diritti riservati.', 'foot.bug': 'Hai trovato un bug? Segnalamelo',
   },
   en: {
@@ -60,6 +61,7 @@ const TEXT = {
     'dl.versions': 'See every development version →',
     'don.title': 'Support development', 'don.p1': "I'm building Supplyville on my own, in my spare time. If you like the project and want to see it grow faster, a small donation helps me a lot to spend more hours on it and add new features.",
     'don.p2': "It's completely optional: the game will keep moving forward anyway. Thanks for being here!", 'don.btn': '☕ Support me on Ko-fi',
+    'cat.title': 'Everything in Supplyville', 'cat.sub': 'Vehicles, roads, crops, shops, water, power... and over 50 products travelling around your city.', 'cat.prod': 'Products',
     'foot.rights': 'All rights reserved.', 'foot.bug': 'Found a bug? Let me know',
   },
 };
@@ -68,8 +70,18 @@ const ES = {};
 document.querySelectorAll('[data-t]').forEach(e => { ES[e.dataset.t] = e.textContent; });
 const DOC_LANG = { es: 'es', it: 'it', en: 'en' };
 
+function esc(t) { const d = document.createElement('span'); d.textContent = t; return d.innerHTML; }
+function renderCatalog(l) {
+  const list = document.getElementById('catalog-list'), prod = document.getElementById('product-list');
+  if (!list || typeof CATALOG === 'undefined') return;
+  list.innerHTML = CATALOG.map(c => '<div class="cat"><h3><span>' + c.icon + '</span>' + esc(c.t[l]) + '</h3><ul>' +
+    c.items.map(i => '<li>' + esc(i[l]) + '</li>').join('') + '</ul></div>').join('');
+  prod.innerHTML = PRODUCTS.map(g => '<div class="prow"><b>' + esc(g.t[l]) + '</b><span>' + g.items.map(i => esc(i[l])).join(' · ') + '</span></div>').join('');
+}
+
 function setLang(l) {
   if (!DOC_LANG[l]) l = 'es';
+  renderCatalog(l);
   const d = l === 'es' ? ES : TEXT[l];
   document.querySelectorAll('[data-t]').forEach(e => { const k = e.dataset.t; if (d[k] != null) e.textContent = d[k]; });
   document.documentElement.lang = l;
