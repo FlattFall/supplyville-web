@@ -62,7 +62,7 @@ img { max-width: 100%; display: block; }
 .dark h2 { color: var(--yellow); }
 
 /* catena */
-.chain { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 0 auto 50px; }
+.chain { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 0 auto 10px; }
 .step { background: #fff; border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); border-radius: 8px; padding: 12px 18px; text-align: center; min-width: 140px; }
 .step b { display: block; font-size: 30px; }
 .step span { display: block; font-weight: 900; }
