@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css?v=4">
+<link rel="stylesheet" href="site.css?v=5">
 </head>
 <body>
 
@@ -39,7 +39,7 @@
     <h1 class="logo">SUPPLYVILLE</h1>
     <p class="tagline" data-t="hero.tagline">Construye la ciudad. Gestiona la cadena de suministro.</p>
     <p class="lead" data-t="hero.lead">Un city builder isométrico retro donde cada pan del supermercado empezó como trigo en una granja. Carreteras, fábricas, furgonetas, barcos, electricidad y agua: tú decides cómo funciona todo.</p>
-    <div class="cta"><span class="soon-pill" data-t="hero.download">⏳ Muy pronto disponible</span></div>
+    <div class="cta"><a class="soon-pill" href="#download" data-t="hero.download">⏳ Muy pronto disponible</a></div>
   </div>
 </section>
 
@@ -72,6 +72,7 @@
 <section class="section" id="catalog">
   <h2 data-t="cat.title">Todo lo que hay en Supplyville</h2>
   <p class="sub" data-t="cat.sub">Vehículos, carreteras, cultivos, tiendas, agua, energía... y más de 50 productos que viajan por tu ciudad.</p>
+  <p class="hint" data-t="cat.hint">👆 Toca un elemento para ver para qué sirve</p>
   <div class="catalog" id="catalog-list"></div>
   <div class="products">
     <h3 data-t="cat.prod">Productos</h3>
@@ -117,7 +118,11 @@
   <p>© 2026 <b>SUPPLYVILLE</b> · <span data-t="foot.rights">Todos los derechos reservados.</span></p>
 </footer>
 
-<script src="catalog.js?v=4"></script>
-<script src="site.js?v=4"></script>
+<div id="info" class="info" hidden role="dialog" aria-modal="true">
+  <div class="info-box"><button type="button" class="info-close" aria-label="Cerrar">✕</button><div class="info-body"></div></div>
+</div>
+
+<script src="catalog.js?v=5"></script>
+<script src="site.js?v=5"></script>
 </body>
 </html>

@@ -31,7 +31,7 @@ const TEXT = {
     'dl.versions': 'Guarda tutte le versioni dello sviluppo →',
     'don.title': 'Sostieni lo sviluppo', 'don.p1': 'Supplyville lo sto creando da solo, nel tempo libero. Se il progetto ti piace e vuoi vederlo crescere più in fretta, una piccola donazione mi aiuta tantissimo a dedicarci più ore e ad aggiungere nuove funzioni.',
     'don.p2': 'È del tutto volontario: il gioco andrà avanti comunque. Grazie di essere qui!', 'don.btn': '☕ Sostienimi su Ko-fi',
-    'cat.title': 'Tutto quello che c\'è in Supplyville', 'cat.sub': 'Veicoli, strade, colture, negozi, acqua, energia... e più di 50 prodotti che viaggiano per la tua città.', 'cat.prod': 'Prodotti',
+    'cat.title': 'Tutto quello che c\'è in Supplyville', 'cat.sub': 'Veicoli, strade, colture, negozi, acqua, energia... e più di 50 prodotti che viaggiano per la tua città.', 'cat.prod': 'Prodotti', 'cat.hint': '👆 Tocca un elemento per vedere a cosa serve',
     'foot.rights': 'Tutti i diritti riservati.', 'foot.bug': 'Hai trovato un bug? Segnalamelo',
   },
   en: {
@@ -61,7 +61,7 @@ const TEXT = {
     'dl.versions': 'See every development version →',
     'don.title': 'Support development', 'don.p1': "I'm building Supplyville on my own, in my spare time. If you like the project and want to see it grow faster, a small donation helps me a lot to spend more hours on it and add new features.",
     'don.p2': "It's completely optional: the game will keep moving forward anyway. Thanks for being here!", 'don.btn': '☕ Support me on Ko-fi',
-    'cat.title': 'Everything in Supplyville', 'cat.sub': 'Vehicles, roads, crops, shops, water, power... and over 50 products travelling around your city.', 'cat.prod': 'Products',
+    'cat.title': 'Everything in Supplyville', 'cat.sub': 'Vehicles, roads, crops, shops, water, power... and over 50 products travelling around your city.', 'cat.prod': 'Products', 'cat.hint': '👆 Tap any item to see what it does',
     'foot.rights': 'All rights reserved.', 'foot.bug': 'Found a bug? Let me know',
   },
 };
@@ -71,16 +71,42 @@ document.querySelectorAll('[data-t]').forEach(e => { ES[e.dataset.t] = e.textCon
 const DOC_LANG = { es: 'es', it: 'it', en: 'en' };
 
 function esc(t) { const d = document.createElement('span'); d.textContent = t; return d.innerHTML; }
+let CUR_LANG = 'es';
+const ITEMS = [];   // tutti gli elementi cliccabili (catalogo + prodotti), indice = data-i
+function chip(item, l) {
+  let i = ITEMS.indexOf(item); if (i < 0) { ITEMS.push(item); i = ITEMS.length - 1; }
+  const ic = item.icon ? '<img src="' + item.icon + '" alt="">' : '<span class="emo">' + (item.emoji || '') + '</span>';
+  return '<li><button type="button" class="chip" data-i="' + i + '">' + ic + esc(item.name[l]) + '</button></li>';
+}
 function renderCatalog(l) {
   const list = document.getElementById('catalog-list'), prod = document.getElementById('product-list');
   if (!list || typeof CATALOG === 'undefined') return;
   list.innerHTML = CATALOG.map(c => '<div class="cat"><h3><span>' + c.icon + '</span>' + esc(c.t[l]) + '</h3><ul>' +
-    c.items.map(i => '<li>' + esc(i[l]) + '</li>').join('') + '</ul></div>').join('');
-  prod.innerHTML = PRODUCTS.map(g => '<div class="prow"><b>' + esc(g.t[l]) + '</b><span>' + g.items.map(i => esc(i[l])).join(' · ') + '</span></div>').join('');
+    c.items.map(i => chip(i, l)).join('') + '</ul></div>').join('');
+  prod.innerHTML = PRODUCTS.map(g => '<div class="prow"><b>' + esc(g.t[l]) + '</b><ul>' + g.items.map(i => chip(i, l)).join('') + '</ul></div>').join('');
 }
+
+// finestra con le informazioni di un elemento
+function openInfo(item) {
+  const l = CUR_LANG, box = document.getElementById('info');
+  const ic = item.icon ? '<img src="' + item.icon + '" alt="">' : '<span class="emo">' + (item.emoji || '') + '</span>';
+  const desc = item.desc && item.desc[l] ? '<p>' + esc(item.desc[l]) + '</p>' : '';
+  const lines = item.lines && item.lines[l] && item.lines[l].length ? '<ul>' + item.lines[l].map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '';
+  box.querySelector('.info-body').innerHTML = '<div class="info-head">' + ic + '<h3>' + esc(item.name[l]) + '</h3></div>' + desc + lines;
+  box.hidden = false;
+  box.querySelector('.info-close').focus();
+}
+function closeInfo() { document.getElementById('info').hidden = true; }
+document.addEventListener('click', e => {
+  const c = e.target.closest('.chip');
+  if (c) { openInfo(ITEMS[+c.dataset.i]); return; }
+  if (e.target.id === 'info' || e.target.closest('.info-close')) closeInfo();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeInfo(); });
 
 function setLang(l) {
   if (!DOC_LANG[l]) l = 'es';
+  CUR_LANG = l;
   renderCatalog(l);
   const d = l === 'es' ? ES : TEXT[l];
   document.querySelectorAll('[data-t]').forEach(e => { const k = e.dataset.t; if (d[k] != null) e.textContent = d[k]; });
