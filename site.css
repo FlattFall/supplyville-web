@@ -45,7 +45,7 @@ img { max-width: 100%; display: block; }
   border-bottom: 4px solid var(--ink); }
 .hero-inner { max-width: 860px; background: rgba(26,28,44,.62); border: 3px solid var(--ink); border-radius: 14px; padding: 30px 28px 34px; box-shadow: 8px 8px 0 rgba(0,0,0,.5); backdrop-filter: blur(2px); }
 .badge { display: inline-block; background: var(--red); color: #fff; font-weight: 800; font-size: 13px; padding: 6px 12px; border: 2px solid var(--ink); border-radius: 4px; transform: rotate(-2deg); }
-.logo { font-family: 'Press Start 2P', monospace; font-size: clamp(30px, 7.4vw, 84px); margin: 26px 0 14px; color: var(--yellow); letter-spacing: 2px;
+.logo { font-family: 'Press Start 2P', monospace; font-size: clamp(22px, 5.4vw, 64px); margin: 26px 0 18px; color: var(--yellow); white-space: nowrap; transform: translateX(-4px);
   text-shadow: 4px 4px 0 var(--red), 8px 8px 0 var(--ink); -webkit-text-stroke: 2px var(--ink); }
 .tagline { font-size: clamp(20px, 3vw, 30px); font-weight: 900; margin: 0 0 12px; text-shadow: 0 3px 0 var(--ink), 0 0 18px rgba(0,0,0,.6); }
 .lead { font-size: 18px; max-width: 680px; margin: 0 auto 30px; text-shadow: 0 2px 8px rgba(0,0,0,.8); }
@@ -95,6 +95,13 @@ img { max-width: 100%; display: block; }
 .more { text-align: center; margin-top: 34px; font-weight: 700; }
 
 .support { max-width: 860px; }
+.dl-box { max-width: 860px; margin: 0 auto; background: #fff; border: 3px solid var(--ink); border-radius: 12px; box-shadow: 7px 7px 0 var(--ink); padding: 32px; display: grid; grid-template-columns: auto 1fr; gap: 26px; align-items: center; border-top: 12px solid var(--blue); }
+.dl-icon { font-size: 64px; line-height: 1; }
+.dl-box h3 { margin: 0 0 8px; font-size: 22px; font-weight: 900; }
+.dl-box p { margin: 0 0 18px; }
+.dl-plats { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+.dl-plats span { font-weight: 800; font-size: 14px; padding: 6px 12px; border: 2px solid var(--ink); border-radius: 6px; background: var(--paper); }
+@media (max-width: 760px) { .dl-box { grid-template-columns: 1fr; text-align: center; } .dl-plats { justify-content: center; } }
 .support-box { background: #fff; border: 3px solid var(--ink); border-radius: 12px; box-shadow: 7px 7px 0 var(--ink); padding: 36px 32px; text-align: center; border-top: 12px solid var(--red); }
 .support-box h2 { margin-bottom: 18px; }
 .support-box p { font-size: 17px; max-width: 620px; margin: 0 auto 12px; }

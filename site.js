@@ -5,7 +5,7 @@ const DONATE_URL = 'https://ko-fi.com/supplyville';
 
 const TEXT = {
   it: {
-    'nav.features': 'Caratteristiche', 'nav.gallery': 'Immagini', 'nav.download': 'Gioca', 'nav.play': 'Gioca',
+    'nav.features': 'Caratteristiche', 'nav.gallery': 'Immagini', 'nav.download': 'Scarica', 'nav.play': 'Gioca',
     'hero.badge': 'In sviluppo · novità ogni settimana',
     'hero.tagline': 'Costruisci la città. Gestisci la filiera.',
     'hero.lead': "Un city builder isometrico retro dove ogni pagnotta del supermercato è partita come grano in una fattoria. Strade, fabbriche, furgoni, navi, corrente e acqua: decidi tu come funziona tutto.",
@@ -25,7 +25,7 @@ const TEXT = {
     'gal.title': 'Immagini del gioco', 'gal.sub': 'Tutto disegnato nel codice, pixel per pixel, in stile retro.',
     'gal.1': 'Quartieri, negozi e il viale principale', 'gal.2': 'Zona industriale e porto', 'gal.3': 'Fattoria, campi di grano e magazzino',
     'gal.4': 'Una nave arriva al porto', 'gal.5': 'Parco eolico, pannelli solari e piattaforma petrolifera',
-    'dl.title': 'Gioca ora',
+    'dl.title': 'Scarica', 'dl.t': 'Supplyville per PC', 'dl.p': 'Stiamo preparando la versione da scaricare per installare Supplyville sul tuo computer e giocare anche senza internet. Molto presto sarà disponibile qui!', 'dl.b': '⏳ Prossimamente',
     'dl.web.t': 'Nel browser', 'dl.web.p': 'Senza installare niente. Sempre l\'ultima versione. Le partite si salvano nel browser.', 'dl.web.b': '▶ Gioca ora',
     'dl.win.t': 'Versione per PC', 'dl.win.p': 'Presto potrai scaricare Supplyville e installarlo sul tuo computer. Nel frattempo gioca gratis nel browser.', 'dl.win.b': '⏳ Prossimamente',
     'dl.versions': 'Guarda tutte le versioni dello sviluppo →',
@@ -34,7 +34,7 @@ const TEXT = {
     'foot.rights': 'Tutti i diritti riservati.', 'foot.bug': 'Hai trovato un bug? Segnalamelo',
   },
   en: {
-    'nav.features': 'Features', 'nav.gallery': 'Screenshots', 'nav.download': 'Play', 'nav.play': 'Play',
+    'nav.features': 'Features', 'nav.gallery': 'Screenshots', 'nav.download': 'Download', 'nav.play': 'Play',
     'hero.badge': 'In development · new features every week',
     'hero.tagline': 'Build the city. Run the supply chain.',
     'hero.lead': 'A retro isometric city builder where every loaf of bread in the supermarket started as wheat on a farm. Roads, factories, vans, ships, power and water: you decide how it all works.',
@@ -54,7 +54,7 @@ const TEXT = {
     'gal.title': 'Screenshots', 'gal.sub': 'Everything drawn in code, pixel by pixel, in retro style.',
     'gal.1': 'Neighbourhoods, shops and the main avenue', 'gal.2': 'Industrial zone and port', 'gal.3': 'Farm, wheat fields and warehouse',
     'gal.4': 'A ship arrives at the port', 'gal.5': 'Wind farm, solar panels and oil platform',
-    'dl.title': 'Play now',
+    'dl.title': 'Download', 'dl.t': 'Supplyville for PC', 'dl.p': "We're preparing the downloadable version so you can install Supplyville on your computer and play offline. It will be available here very soon!", 'dl.b': '⏳ Coming soon',
     'dl.web.t': 'In your browser', 'dl.web.p': 'Nothing to install. Always the latest version. Games are saved in your browser.', 'dl.web.b': '▶ Play now',
     'dl.win.t': 'PC version', 'dl.win.p': 'Soon you will be able to download Supplyville and install it on your computer. In the meantime, play free in your browser.', 'dl.win.b': '⏳ Coming soon',
     'dl.versions': 'See every development version →',
