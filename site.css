@@ -96,8 +96,9 @@ img { max-width: 100%; display: block; }
 /* finestra informazioni */
 .info { position: fixed; inset: 0; z-index: 50; background: rgba(17,17,17,.6); display: grid; place-items: center; padding: 16px; }
 .info[hidden] { display: none; }
-.info-box { position: relative; background: #fff; border: 3px solid var(--ink); border-radius: 12px; box-shadow: 8px 8px 0 var(--ink); border-top: 12px solid var(--yellow); max-width: 520px; width: 100%; max-height: 85vh; overflow: auto; padding: 22px 24px 20px; }
-.info-close { position: absolute; top: 10px; right: 10px; width: 36px; height: 36px; border: 2px solid var(--ink); border-radius: 6px; background: var(--paper); font-size: 16px; font-weight: 900; cursor: pointer; }
+.info-box { position: relative; background: #fff; border: 3px solid var(--ink); border-radius: 12px; box-shadow: 8px 8px 0 var(--ink); border-top: 12px solid var(--yellow); overflow-x: hidden; max-width: 520px; width: 100%; max-height: 85vh; overflow: auto; padding: 22px 24px 20px; }
+.info-close { position: absolute; top: 10px; right: 10px; z-index: 2; width: 36px; height: 36px; border: 2px solid var(--ink); border-radius: 6px; background: var(--paper); font-size: 16px; font-weight: 900; cursor: pointer; }
+.info-pic { display: block; width: calc(100% + 48px); max-width: none; margin: -22px -24px 16px; aspect-ratio: 3 / 2; object-fit: cover; border-bottom: 3px solid var(--ink); }
 .info-head { display: flex; align-items: center; gap: 12px; margin: 0 40px 12px 0; }
 .info-head img { width: 64px; height: 48px; image-rendering: pixelated; object-fit: contain; }
 .info-head .emo { font-size: 40px; }

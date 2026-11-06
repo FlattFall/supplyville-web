@@ -92,7 +92,8 @@ function openInfo(item) {
   const ic = item.icon ? '<img src="' + item.icon + '" alt="">' : '<span class="emo">' + (item.emoji || '') + '</span>';
   const desc = item.desc && item.desc[l] ? '<p>' + esc(item.desc[l]) + '</p>' : '';
   const lines = item.lines && item.lines[l] && item.lines[l].length ? '<ul>' + item.lines[l].map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '';
-  box.querySelector('.info-body').innerHTML = '<div class="info-head">' + ic + '<h3>' + esc(item.name[l]) + '</h3></div>' + desc + lines;
+  const pic = item.img ? '<img class="info-pic" src="' + item.img + '" alt="">' : '';
+  box.querySelector('.info-body').innerHTML = pic + '<div class="info-head">' + ic + '<h3>' + esc(item.name[l]) + '</h3></div>' + desc + lines;
   box.hidden = false;
   box.querySelector('.info-close').focus();
 }

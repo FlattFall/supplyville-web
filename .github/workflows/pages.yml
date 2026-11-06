@@ -24,7 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Prepara i file del sito
-        run: mkdir site && cp -r index.html site.css site.js img CNAME .nojekyll site/
+        run: mkdir site && cp -r index.html site.css site.js catalog.js img CNAME .nojekyll site/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
