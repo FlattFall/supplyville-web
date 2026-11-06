@@ -1,7 +1,7 @@
 // Lingue del sito: lo spagnolo è scritto nella pagina, italiano e inglese qui.
 // La lingua si sceglie da sola (lingua del browser) e si ricorda se la si cambia.
-// Link per le donazioni (PayPal): vuoto = la sezione non si vede
-const DONATE_URL = '';
+// Link per le donazioni (Ko-fi, pagamenti con Stripe): vuoto = la sezione non si vede
+const DONATE_URL = 'https://ko-fi.com/supplyville';
 
 const TEXT = {
   it: {
@@ -30,7 +30,7 @@ const TEXT = {
     'dl.win.t': 'Versione per PC', 'dl.win.p': 'Presto potrai scaricare Supplyville e installarlo sul tuo computer. Nel frattempo gioca gratis nel browser.', 'dl.win.b': '⏳ Prossimamente',
     'dl.versions': 'Guarda tutte le versioni dello sviluppo →',
     'don.title': 'Sostieni lo sviluppo', 'don.p1': 'Supplyville lo sto creando da solo, nel tempo libero. Se il progetto ti piace e vuoi vederlo crescere più in fretta, una piccola donazione mi aiuta tantissimo a dedicarci più ore e ad aggiungere nuove funzioni.',
-    'don.p2': 'È del tutto volontario: il gioco andrà avanti comunque. Grazie di essere qui!', 'don.btn': '♥ Dona con PayPal',
+    'don.p2': 'È del tutto volontario: il gioco andrà avanti comunque. Grazie di essere qui!', 'don.btn': '☕ Sostienimi su Ko-fi',
     'foot.rights': 'Tutti i diritti riservati.', 'foot.bug': 'Hai trovato un bug? Segnalamelo',
   },
   en: {
@@ -59,7 +59,7 @@ const TEXT = {
     'dl.win.t': 'PC version', 'dl.win.p': 'Soon you will be able to download Supplyville and install it on your computer. In the meantime, play free in your browser.', 'dl.win.b': '⏳ Coming soon',
     'dl.versions': 'See every development version →',
     'don.title': 'Support development', 'don.p1': "I'm building Supplyville on my own, in my spare time. If you like the project and want to see it grow faster, a small donation helps me a lot to spend more hours on it and add new features.",
-    'don.p2': "It's completely optional: the game will keep moving forward anyway. Thanks for being here!", 'don.btn': '♥ Donate with PayPal',
+    'don.p2': "It's completely optional: the game will keep moving forward anyway. Thanks for being here!", 'don.btn': '☕ Support me on Ko-fi',
     'foot.rights': 'All rights reserved.', 'foot.bug': 'Found a bug? Let me know',
   },
 };
