@@ -124,6 +124,7 @@ if (DONATE_URL) { document.getElementById('donate-link').href = DONATE_URL; docu
 
 // ---------- Google Analytics solo con il consenso (banner dei cookie) ----------
 const GA_ID = 'G-6P6BSCXYS7';
+const GTAG_ID = 'GTM-544V358J';   // tag Google consigliato da Analytics per questo stream (contiene già G-6P6BSCXYS7)
 const CK_KEY = 'supplyville.cookies';   // 'yes' | 'no'
 function ckGet() { try { return localStorage.getItem(CK_KEY); } catch (e) { return null; } }
 function ckSet(v) { try { localStorage.setItem(CK_KEY, v); } catch (e) {} }
@@ -135,8 +136,7 @@ function loadGA() {
   window.gtag = function () { dataLayer.push(arguments); };
   gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'granted' });
   gtag('js', new Date());
-  gtag('config', GA_ID, { anonymize_ip: true });
-  const s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+  const s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtm.js?id=' + GTAG_ID;
   document.head.appendChild(s);
 }
 function clearGACookies() {
