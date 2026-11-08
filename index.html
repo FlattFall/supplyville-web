@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css?v=7">
+<link rel="stylesheet" href="site.css?v=8">
 </head>
 <body>
 
@@ -106,14 +106,26 @@
 
 <footer class="foot">
   <p>© 2026 <b>SUPPLYVILLE</b> · <span data-t="foot.rights">Todos los derechos reservados.</span></p>
+  <p><button type="button" class="linkbtn" id="cookie-open" data-t="ck.settings">Configuración de cookies</button></p>
 </footer>
+
+<div id="cookies" class="cookies" hidden role="dialog" aria-live="polite">
+  <div class="ck-box">
+    <p class="ck-t" data-t="ck.title">🍪 ¿Aceptas las cookies?</p>
+    <p class="ck-p" data-t="ck.text">Usamos Google Analytics para saber cuántas personas visitan la página y desde dónde llegan. Solo se activa si aceptas. Puedes cambiar de idea cuando quieras desde el enlace al final de la página.</p>
+    <div class="ck-btns">
+      <button type="button" class="btn ck-yes" id="ck-yes" data-t="ck.yes">Aceptar</button>
+      <button type="button" class="btn ck-no" id="ck-no" data-t="ck.no">Rechazar</button>
+    </div>
+  </div>
+</div>
 
 <div id="info" class="info" hidden role="dialog" aria-modal="true">
   <div class="info-box"><button type="button" class="info-close" aria-label="Cerrar">✕</button><div class="info-body"></div></div>
 </div>
 
-<script src="catalog.js?v=7"></script>
-<script src="site.js?v=7"></script>
+<script src="catalog.js?v=8"></script>
+<script src="site.js?v=8"></script>
 <!-- Statistiche delle visite (GoatCounter: senza cookie) -->
 <script data-goatcounter="https://supplyville.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

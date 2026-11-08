@@ -32,6 +32,7 @@ const TEXT = {
     'don.title': 'Sostieni lo sviluppo', 'don.p1': 'Supplyville lo sto creando da solo, nel tempo libero. Se il progetto ti piace e vuoi vederlo crescere più in fretta, una piccola donazione mi aiuta tantissimo a dedicarci più ore e ad aggiungere nuove funzioni.',
     'don.p2': 'È del tutto volontario: il gioco andrà avanti comunque. Grazie di essere qui!', 'don.btn': '☕ Sostienimi su Ko-fi',
     'cat.title': 'Tutto quello che c\'è in Supplyville', 'cat.sub': 'Veicoli, strade, colture, negozi, acqua, energia... e più di 50 prodotti che viaggiano per la tua città.', 'cat.prod': 'Prodotti', 'cat.hint': '👆 Tocca un elemento per vedere a cosa serve',
+    'ck.settings': 'Impostazioni dei cookie', 'ck.title': '🍪 Accetti i cookie?', 'ck.text': 'Usiamo Google Analytics per sapere quante persone visitano la pagina e da dove arrivano. Si attiva solo se accetti. Puoi cambiare idea quando vuoi dal link in fondo alla pagina.', 'ck.yes': 'Accetta', 'ck.no': 'Rifiuta',
     'foot.rights': 'Tutti i diritti riservati.', 'foot.bug': 'Hai trovato un bug? Segnalamelo',
   },
   en: {
@@ -62,6 +63,7 @@ const TEXT = {
     'don.title': 'Support development', 'don.p1': "I'm building Supplyville on my own, in my spare time. If you like the project and want to see it grow faster, a small donation helps me a lot to spend more hours on it and add new features.",
     'don.p2': "It's completely optional: the game will keep moving forward anyway. Thanks for being here!", 'don.btn': '☕ Support me on Ko-fi',
     'cat.title': 'Everything in Supplyville', 'cat.sub': 'Vehicles, roads, crops, shops, water, power... and over 50 products travelling around your city.', 'cat.prod': 'Products', 'cat.hint': '👆 Tap any item to see what it does',
+    'ck.settings': 'Cookie settings', 'ck.title': '🍪 Do you accept cookies?', 'ck.text': 'We use Google Analytics to know how many people visit the page and where they come from. It is only turned on if you accept. You can change your mind at any time from the link at the bottom of the page.', 'ck.yes': 'Accept', 'ck.no': 'Decline',
     'foot.rights': 'All rights reserved.', 'foot.bug': 'Found a bug? Let me know',
   },
 };
@@ -119,3 +121,36 @@ document.querySelectorAll('.langs button').forEach(b => b.addEventListener('clic
 // richiesta dell'utente: il sito si apre sempre in spagnolo; le altre lingue con i pulsanti in alto
 setLang('es');
 if (DONATE_URL) { document.getElementById('donate-link').href = DONATE_URL; document.getElementById('support').hidden = false; }
+
+// ---------- Google Analytics solo con il consenso (banner dei cookie) ----------
+const GA_ID = 'G-6P6BSCXYS7';
+const CK_KEY = 'supplyville.cookies';   // 'yes' | 'no'
+function ckGet() { try { return localStorage.getItem(CK_KEY); } catch (e) { return null; } }
+function ckSet(v) { try { localStorage.setItem(CK_KEY, v); } catch (e) {} }
+let gaLoaded = false;
+function loadGA() {
+  if (gaLoaded || !GA_ID) return;
+  gaLoaded = true;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'granted' });
+  gtag('js', new Date());
+  gtag('config', GA_ID, { anonymize_ip: true });
+  const s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+  document.head.appendChild(s);
+}
+function clearGACookies() {
+  for (const c of document.cookie.split(';')) {
+    const n = c.split('=')[0].trim();
+    if (/^_ga/.test(n)) for (const d of ['', location.hostname, '.' + location.hostname.replace(/^www\./, '')])
+      document.cookie = n + '=; Max-Age=0; path=/' + (d ? '; domain=' + d : '');
+  }
+}
+function showCookies(show) { document.getElementById('cookies').hidden = !show; }
+document.getElementById('ck-yes').addEventListener('click', () => { ckSet('yes'); showCookies(false); loadGA(); });
+document.getElementById('ck-no').addEventListener('click', () => {
+  const was = ckGet(); ckSet('no'); showCookies(false); clearGACookies();
+  if (was === 'yes' && gaLoaded) location.reload();   // Analytics era già attivo: si ricarica senza
+});
+document.getElementById('cookie-open').addEventListener('click', () => showCookies(true));
+if (ckGet() === 'yes') loadGA(); else if (ckGet() !== 'no') showCookies(true);

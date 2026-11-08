@@ -166,3 +166,14 @@ img { max-width: 100%; display: block; }
   .chain i { transform: rotate(90deg); }
   .chain { flex-direction: column; }
 }
+
+/* banner dei cookie */
+.cookies { position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 80; display: flex; justify-content: center; }
+.cookies[hidden] { display: none; }
+.ck-box { max-width: 620px; width: 100%; background: #fff; border: 3px solid var(--ink); border-radius: 12px; box-shadow: 7px 7px 0 var(--ink); padding: 18px 22px; border-top: 10px solid var(--yellow); }
+.ck-t { margin: 0 0 6px; font-weight: 900; font-size: 18px; }
+.ck-p { margin: 0 0 14px; font-size: 14px; }
+.ck-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.ck-btns .btn { padding: 10px 22px; font-size: 15px; cursor: pointer; font-family: inherit; }
+.ck-no { background: #e4e7ef; }
+.linkbtn { background: none; border: 0; color: #b9c0d0; font: inherit; font-size: 13px; text-decoration: underline; cursor: pointer; padding: 0; }
