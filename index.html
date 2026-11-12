@@ -17,13 +17,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css?v=9">
+<link rel="stylesheet" href="site.css?v=10">
 </head>
 <body>
 
 <header class="nav">
   <a class="brand" href="#top"><img src="img/icon.png" alt="" width="36" height="36"><span>SUPPLYVILLE</span></a>
   <nav class="links">
+    <a href="jugar/" class="nav-play" data-t="nav.play">Jugar</a>
     <a href="#features" data-t="nav.features">Características</a>
     <a href="#gallery" data-t="nav.gallery">Imágenes</a>
     <a href="#download" data-t="nav.download">Descargar</a>
@@ -39,7 +40,8 @@
     <h1 class="logo">SUPPLYVILLE</h1>
     <p class="tagline" data-t="hero.tagline">Construye la ciudad. Gestiona la cadena de suministro.</p>
     <p class="lead" data-t="hero.lead">Un city builder isométrico retro donde cada pan del supermercado empezó como trigo en una granja. Carreteras, fábricas, furgonetas, barcos, electricidad y agua: tú decides cómo funciona todo.</p>
-    <div class="cta"><a class="soon-pill" href="#download" data-t="hero.download">⏳ Muy pronto disponible</a></div>
+    <div class="cta"><a class="btn btn-big" href="jugar/" data-t="hero.play">▶ Juega gratis en el navegador</a><a class="soon-pill" href="#download" data-t="hero.download">⏳ Versión para PC muy pronto</a></div>
+    <p class="hero-note" data-t="hero.mobile">También en el móvil: mejor en horizontal.</p>
   </div>
 </section>
 
@@ -84,6 +86,14 @@
 
 <section class="section" id="download">
   <h2 data-t="dl.title">Descargar</h2>
+  <div class="dl-box dl-web">
+    <div class="dl-icon">🌐</div>
+    <div>
+      <h3 data-t="dl.web.t">En el navegador</h3>
+      <p data-t="dl.web.p">Sin instalar nada y siempre la última versión. Funciona en el ordenador y en el móvil (mejor en horizontal). Las partidas se guardan en el navegador.</p>
+      <a class="btn btn-big" href="jugar/" data-t="dl.web.b">▶ Jugar ahora</a>
+    </div>
+  </div>
   <div class="dl-box">
     <div class="dl-icon">💻</div>
     <div>
@@ -125,7 +135,7 @@
 </div>
 
 <script src="catalog.js?v=9"></script>
-<script src="site.js?v=9"></script>
+<script src="site.js?v=10"></script>
 <!-- Statistiche delle visite (GoatCounter: senza cookie) -->
 <script data-goatcounter="https://supplyville.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

@@ -177,3 +177,9 @@ img { max-width: 100%; display: block; }
 .ck-btns .btn { padding: 10px 22px; font-size: 15px; cursor: pointer; font-family: inherit; }
 .ck-no { background: #e4e7ef; }
 .linkbtn { background: none; border: 0; color: #b9c0d0; font: inherit; font-size: 13px; text-decoration: underline; cursor: pointer; padding: 0; }
+
+/* Gioca nel browser (il gioco è in /jugar/, copiato dal repository city-builder dal workflow) */
+.nav .links a.nav-play { background: var(--yellow); color: var(--ink); border: 2px solid var(--ink); border-radius: 4px; padding: 2px 10px; font-weight: 900; }
+.hero-note { margin-top: 14px; font-size: 14px; opacity: .85; }
+.dl-box + .dl-box { margin-top: 26px; }
+.dl-web { border-top-color: var(--yellow); }
