@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#1a1c2c">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Supplyville">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<title>Supplyville</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div id="topbar">
+  <span><span data-i18n>Fondi:</span> <b id="money">-</b></span>
+  <span><span data-i18n>Abitanti:</span> <b id="population">0</b></span>
+  <span><span data-i18n>Disoccupati:</span> <b id="unemployed">0</b></span>
+  <span><span data-i18n>Case:</span> <b id="houses">0</b></span>
+  <span><span data-i18n>Industrie:</span> <b id="industries">0</b></span>
+  <span class="speed-btns" id="speed-btns">
+    <button data-speed="0" title="Pausa (Spazio)">⏸</button>
+    <button data-speed="1" title="Normale">▶</button>
+    <button data-speed="2" title="Veloce">▶▶</button>
+    <button data-speed="5" title="Super rapido">▶▶▶</button>
+  </span>
+  <span class="top-btns">
+    <button id="manual-btn" data-i18n>Manuale (M)</button>
+    <button id="under-btn" data-i18n>Sottosuolo (U)</button>
+    <button id="stats-btn" data-i18n>Produzione (C)</button>
+    <button id="progress-btn" data-i18n>Progressi (P)</button>
+    <button id="menu-btn" data-i18n>Menu (Esc)</button>
+    <button id="fs-btn" title="Schermo intero" hidden></button>
+  </span>
+</div>
+
+<div id="submenu" hidden></div>
+<div id="panel" hidden></div>
+<div id="subpanel" hidden></div>
+<div id="fieldbar" hidden><span id="fieldbar-text"></span> <button id="fieldbar-done" data-i18n>Fatto</button></div>
+<div id="toolname"></div>
+<button id="rotate-btn" hidden data-i18n>↻ Ruota (R)</button>
+<div id="toolbar"></div>
+<div id="toast"></div>
+
+<div id="help" data-i18n-html>Sinistro: usa lo strumento<br>Mano: trascina la mappa, clic su edificio = info<br>Destro/centrale + trascina: muovi | Rotella: zoom<br>WASD/frecce: muovi | 1-9: strumenti | R: ruota<br>M: manuale | P: progressi | Esc: menu<br>Spazio: pausa | ▶ ▶▶ ▶▶▶ in alto: velocità</div>
+
+<!-- Produzione della città (tasto C) -->
+<div id="stats" class="overlay" hidden>
+  <div class="ov-box">
+    <div class="ov-head"><h2 data-i18n>Produzione della città</h2><span id="stats-sub" class="ov-sub"></span><button id="stats-close" class="ov-close">✕</button></div>
+    <div id="stats-body" class="ov-body"></div>
+  </div>
+</div>
+
+<!-- Progressi: sblocchi a pagamento (tasto P) -->
+<div id="progress" class="overlay" hidden>
+  <div class="ov-box">
+    <div class="ov-head"><h2 data-i18n>Progressi</h2><span id="progress-sub" class="ov-sub"></span><button id="progress-close" class="ov-close">✕</button></div>
+    <div id="progress-body" class="ov-body"></div>
+  </div>
+</div>
+
+<!-- Manuale (tasto M) -->
+<div id="manual" class="overlay" hidden>
+  <div class="ov-box wide">
+    <div class="ov-head"><h2 data-i18n>Manuale</h2><span class="ov-sub" data-i18n>Come funziona ogni settore</span><button id="manual-close" class="ov-close">✕</button></div>
+    <div class="man-wrap"><nav id="manual-nav"></nav><div id="manual-body" class="ov-body"></div></div>
+  </div>
+</div>
+
+<!-- Menu principale / pausa -->
+<div id="menu" hidden>
+  <div class="menu-box">
+    <h1>SUPPLYVILLE</h1>
+    <div id="menu-sub" class="menu-sub">Menu principale</div>
+
+    <div class="menu-page" data-page="main">
+      <button id="m-resume" data-i18n>Riprendi</button>
+      <button id="m-save" data-i18n>Salva partita</button>
+      <button id="m-new" data-i18n>Nuova mappa</button>
+      <button id="m-load" data-i18n>Carica mappa</button>
+      <button id="m-tutorial" data-i18n hidden>Tutorial</button>
+      <button id="m-options" data-i18n>Opzioni</button>
+      <button id="m-bug" data-i18n>Segnala un bug</button>
+      <button id="m-exit" data-i18n>Esci</button>
+    </div>
+
+    <div class="menu-page" data-page="new" hidden>
+      <h2 data-i18n>Nuova mappa: grandezza</h2>
+      <div id="size-list"></div>
+      <button class="m-back" data-i18n>Indietro</button>
+    </div>
+
+    <div class="menu-page" data-page="save" hidden>
+      <h2 data-i18n>Salva partita</h2>
+      <div class="menu-label" data-i18n>Nome della partita</div>
+      <input id="save-name" class="save-name" maxlength="40">
+      <button id="save-ok" data-i18n>Salva</button>
+      <button id="save-new" data-i18n>Salva come nuova partita</button>
+      <button class="m-back" data-i18n>Indietro</button>
+    </div>
+
+    <div class="menu-page" data-page="load" hidden>
+      <h2 data-i18n>Carica mappa</h2>
+      <div id="save-list"></div>
+      <button class="m-back" data-i18n>Indietro</button>
+    </div>
+
+    <div class="menu-page" data-page="bug" hidden>
+      <h2 data-i18n>Segnala un bug</h2>
+      <p class="menu-note" data-i18n>Raccontaci cosa non funziona: la segnalazione arriva allo sviluppatore.</p>
+      <textarea id="bug-text" class="bug-field" rows="5" maxlength="3000" data-i18n-ph="Cosa è successo? Cosa stavi facendo?"></textarea>
+      <input id="bug-name" class="bug-field" maxlength="60" data-i18n-ph="Il tuo nome (facoltativo)">
+      <label class="bug-check"><input type="checkbox" id="bug-info" checked> <span data-i18n>Allega le informazioni del gioco (versione, mappa, browser, errori)</span></label>
+      <div class="bug-btns"><button id="bug-send" data-i18n>Invia</button><button id="bug-copy" data-i18n>Copia il testo</button></div>
+      <p class="menu-note small" data-i18n>Si apre GitHub con la segnalazione già scritta (serve un account gratuito). Senza account puoi copiare il testo e mandarlo come preferisci.</p>
+      <button class="m-back" data-i18n>Indietro</button>
+    </div>
+
+    <div class="menu-page" data-page="options" hidden>
+      <h2 data-i18n>Opzioni</h2>
+      <div class="menu-label" data-i18n>Lingua</div>
+      <div id="lang-list" class="lang-list"></div>
+      <div class="menu-label" data-i18n>Volume</div>
+      <div id="volume-list" class="set-list"></div>
+      <p class="menu-note" data-i18n>I suoni arriveranno presto: il volume scelto resta salvato.</p>
+      <div class="menu-label" data-i18n>Tasti</div>
+      <div id="key-list" class="set-list"></div>
+      <button id="keys-reset" class="m-small" data-i18n>Ripristina i tasti</button>
+      <button class="m-back" data-i18n>Indietro</button>
+    </div>
+
+    <div id="menu-msg" class="menu-msg"></div>
+    <div class="menu-copy">© 2026 FlattFall · <span data-i18n>Tutti i diritti riservati</span></div>
+  </div>
+</div>
+
+<!-- L'ordine conta: ogni file usa quelli caricati prima -->
+<div id="confirm" class="overlay" hidden>
+    <div class="confirm-box">
+      <b id="confirm-title"></b>
+      <p id="confirm-text"></p>
+      <div id="confirm-goods"></div>
+      <div class="confirm-btns">
+        <button id="confirm-no" data-i18n>Annulla</button>
+        <button id="confirm-yes" class="danger" data-i18n>Demolisci</button>
+      </div>
+    </div>
+  </div>
+  <script src="js/config.js"></script>
+<script src="js/noise.js"></script>
+<script src="js/terrain.js"></script>
+<script src="js/game.js"></script>
+<script src="js/bridges.js"></script>
+<script src="js/roadgen.js"></script>
+<script src="js/camera.js"></script>
+<script src="js/sprite-data.js"></script>
+<script src="js/sprites.js"></script>
+<script src="js/render.js"></script>
+<script src="js/render-energy.js"></script>
+<script src="js/farcache.js"></script>
+<script src="js/vehicles.js"></script>
+<script src="js/economy.js"></script>
+<script src="js/water.js"></script>
+<script src="js/bus.js"></script>
+<script src="js/people.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/panel.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/stats.js"></script>
+<script src="js/manual.js"></script>
+<script src="js/input.js"></script>
+<script src="js/topicons.js"></script>
+<script src="js/touch.js"></script>
+<script src="js/tutorial.js"></script>
+<script src="js/save.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/i18n-en.js"></script>
+<script src="js/i18n-es.js"></script>
+<script src="js/bugreport.js"></script>
+<script src="js/settings.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
